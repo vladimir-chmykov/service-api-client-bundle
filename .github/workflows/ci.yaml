@@ -1,0 +1,21 @@
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    test:
+        name: checkout and test
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout project
+              uses: actions/checkout@v1
+
+            - name: composer install missing files
+              run: composer install
+
+            - name: run tests
+              run: /usr/bin/php -f vendor/bin/phpunit
